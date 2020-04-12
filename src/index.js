@@ -1,20 +1,12 @@
-import { ApolloProvider } from '@apollo/react-hooks'
-import ApolloClient from 'apollo-boost'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
-const client = new ApolloClient({
-  uri: 'https://spotify-graphql-server.herokuapp.com/graphql'
-})
-
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 )

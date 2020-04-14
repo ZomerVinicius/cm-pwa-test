@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 export const Input = styled.input`
   width: 60%;
+  min-width: 222px;
   padding: 12px 24px;
 
   background-color: transparent;
   transition: transform 250ms ease-in-out;
   font-size: 14px;
   line-height: 18px;
-
   color: white;
   background-color: transparent;
 

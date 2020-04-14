@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from '../Input'
-import { HeaderWrapper, Title } from './styles'
+import { HeaderWrapper, Title } from './Header.styles'
 
 export default function Header() {
   return (

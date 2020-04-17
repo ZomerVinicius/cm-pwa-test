@@ -24,13 +24,12 @@ const GET_ARTISTS = gql`
 `
 
 export default function Home() {
-  const [artist, setArtist] = useState('Calvin Harris')
+  const [artist, setArtist] = useState('')
   const [artistDebouncedValue] = useDebounce(artist, 600)
   const { loading, error, data } = useQuery(GET_ARTISTS, {
-    variables: { artist: artistDebouncedValue }
-    // skip: !artistDebouncedValue || artistDebouncedValue.length < 3
+    variables: { artist: artistDebouncedValue },
+    skip: !artistDebouncedValue || artistDebouncedValue.length < 3
   })
-  console.log(data)
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
   return (
@@ -38,8 +37,12 @@ export default function Home() {
       <ArtistContext.Provider value={{ artist, setArtist }}>
         <Header />
       </ArtistContext.Provider>
-      <Artist artist={data && data.queryArtists[0]} />
-      <Album albums={data && data.queryArtists[0].albums} />
+      {data && data.queryArtists[0] && (
+        <>
+          <Artist artist={data && data.queryArtists[0]} />
+          <Album albums={data && data.queryArtists[0].albums} />
+        </>
+      )}
     </Container>
   )
 }

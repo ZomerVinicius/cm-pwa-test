@@ -38,11 +38,9 @@ export default function Home() {
         <Header />
       </ArtistContext.Provider>
       {loading ? (
-        <CenteredLabel>Carregando...</CenteredLabel>
+        <CenteredLabel>Loading...</CenteredLabel>
       ) : data && data.queryArtists.length === 0 ? (
-        <CenteredLabel>
-          Não foi possível achar artistas com esse nome
-        </CenteredLabel>
+        <CenteredLabel>Could not find artists with this name</CenteredLabel>
       ) : (
         data &&
         data.queryArtists[0] && (

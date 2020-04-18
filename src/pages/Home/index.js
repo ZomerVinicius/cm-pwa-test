@@ -24,20 +24,19 @@ const GET_ARTISTS = gql`
   }
 `
 
-export default function Home() {
+export default function Home({ loadingCache }) {
   const [artist, setArtist] = useState('')
   const [artistDebouncedValue] = useDebounce(artist, 600)
   const { loading, error, data } = useQuery(GET_ARTISTS, {
     variables: { artist: artistDebouncedValue },
     skip: !artistDebouncedValue || artistDebouncedValue.length < 3
   })
-  if (error) return `Error! ${error.message}`
   return (
     <Container>
       <ArtistContext.Provider value={{ artist, setArtist }}>
         <Header />
       </ArtistContext.Provider>
-      {loading ? (
+      {loading || loadingCache ? (
         <CenteredLabel>Loading...</CenteredLabel>
       ) : data && data.queryArtists.length === 0 ? (
         <CenteredLabel>Could not find artists with this name</CenteredLabel>

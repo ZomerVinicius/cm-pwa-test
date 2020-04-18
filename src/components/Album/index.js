@@ -1,13 +1,17 @@
 import React from 'react'
-import { Card, CardContainer, Container } from './Album.styles'
+import { Card, CardContainer, CardContent, Container } from './Album.styles'
 
 export default function Album({ albums }) {
-  return albums.map((album) => (
+  return (
     <Container>
-      <Card key={album && album.id}>
-        <img src={album && album.image} width="100%" alt="albumImg" />
-        <CardContainer>{album && album.name}</CardContainer>
-      </Card>
+      {albums.map((album) => (
+        <CardContainer>
+          <Card key={album && album.id}>
+            <img src={album && album.image} width="100%" alt="albumImg" />
+            <CardContent>{album && album.name}</CardContent>
+          </Card>
+        </CardContainer>
+      ))}
     </Container>
-  ))
+  )
 }

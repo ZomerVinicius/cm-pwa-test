@@ -12,14 +12,25 @@ export const Card = styled.div`
 }
   }
 `
-export const CardContainer = styled.h3`
+export const CardContent = styled.h3`
   padding: 2px 8px;
   text-align: center;
   color: white;
 `
 
-export const Container = styled.div`
+export const CardContainer = styled.div`
   display: flex;
   justify-content: center;
-  grid-column-start: 2;
+`
+
+export const Container = styled.div`
+  grid-row-gap: 30px;
+  margin-top: 30px;
+  padding-bottom: 50px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
 `

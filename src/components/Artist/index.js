@@ -1,11 +1,10 @@
 import React from 'react'
-import { CardContainer, Container } from './Artist.styles'
+import { ArtistImage, CardContainer, Container } from './Artist.styles'
 
 export default function Artist({ artist }) {
-  console.log(artist)
   return (
     <Container>
-      <img src={artist && artist.image} width="30%" alt="artistImg" />
+      <ArtistImage src={artist && artist.image} alt="artistImg" />
       <CardContainer>{artist && artist.name}</CardContainer>
     </Container>
   )

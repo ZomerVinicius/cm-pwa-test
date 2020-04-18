@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useQuery } from '@apollo/react-hooks'
 import Album from 'components/Album'
 import Artist from 'components/Artist'
@@ -6,7 +7,7 @@ import ArtistContext from 'contexts/ArtistContext'
 import gql from 'graphql-tag'
 import React, { useState } from 'react'
 import { useDebounce } from 'use-debounce'
-import { Container } from './Home.styles'
+import { CenteredLabel, Container } from './Home.styles'
 
 const GET_ARTISTS = gql`
   query artists($artist: String!) {
@@ -30,18 +31,26 @@ export default function Home() {
     variables: { artist: artistDebouncedValue },
     skip: !artistDebouncedValue || artistDebouncedValue.length < 3
   })
-  if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
   return (
     <Container>
       <ArtistContext.Provider value={{ artist, setArtist }}>
         <Header />
       </ArtistContext.Provider>
-      {data && data.queryArtists[0] && (
-        <>
-          <Artist artist={data && data.queryArtists[0]} />
-          <Album albums={data && data.queryArtists[0].albums} />
-        </>
+      {loading ? (
+        <CenteredLabel>Carregando...</CenteredLabel>
+      ) : data && data.queryArtists.length === 0 ? (
+        <CenteredLabel>
+          Não foi possível achar artistas com esse nome
+        </CenteredLabel>
+      ) : (
+        data &&
+        data.queryArtists[0] && (
+          <>
+            <Artist artist={data && data.queryArtists[0]} />
+            <Album albums={data && data.queryArtists[0].albums} />
+          </>
+        )
       )}
     </Container>
   )

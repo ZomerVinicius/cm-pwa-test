@@ -38,7 +38,7 @@ export default function Home({ loadingCache }) {
       </ArtistContext.Provider>
       {loading || loadingCache ? (
         <CenteredLabel>Loading...</CenteredLabel>
-      ) : data && data.queryArtists.length === 0 ? (
+      ) : (data && data.queryArtists.length === 0) || error ? (
         <CenteredLabel>Could not find artists with this name</CenteredLabel>
       ) : (
         data &&
